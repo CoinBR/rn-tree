@@ -255,9 +255,7 @@ public class RNTReeTest {
         tree = this.createBinTree03();
         RNTree ref = this.createBinTree03();
  
-        tree.print();
         tree.remove(25);
-        tree.print();
         Node n30 = ref.findNode(25).setRight(ref.findNode(30));
         Node n25 = ref.findNode(25);
         n25.setElement(27);
