@@ -49,9 +49,24 @@ public class RNTree {
     private Node insert(Node ancestor, Integer element){
           
         Node next = (element <= ancestor.getElement()) ? ancestor.getLeft() : ancestor.getRight();
-        
+                
         // if its a null/dull/empty leaf, place the element there
-        return (next.getElement() == null) ? next.placeElement(element) : this.insert(next, element);
+        if (next.getElement() == null) {
+            Node placedNode = next.placeElement(element);
+            Family placedFam = this.findFamily(element);
+                    
+            
+            if (placedNode == this.getRoot()){
+                placedNode.paintBlack();
+            }
+            // case 1
+            else if(placedFam.getParent().isBlack()){ /* ok */  }
+            
+            
+            return placedNode;
+        }
+        return this.insert(next, element);
+        
     }   
   
     
@@ -72,7 +87,21 @@ public class RNTree {
             throw new IllegalArgumentException(
                     "There is no Node with this element in the tree");
         }
-        return (next.getElement() == element) ? new Family(next, position, ancestor) : this.findFamily(next, element);
+        if (next.getElement() == element){
+            Family parentFam;
+            Node parent, grandParent, uncle, brother;
+            parent = grandParent = uncle = brother = null;
+            
+            if (ancestor != this.aboveRoot){ 
+                parentFam = this.findFamily(ancestor.getElement());
+                parent = ancestor;
+                brother = parent.getSon(!position);
+                grandParent = parentFam.getParent();                
+                uncle = (grandParent == null) ? null : grandParent.getSon(!parentFam.getPosition());                
+            }                  
+            return new Family(next, position, parent, grandParent, brother, uncle);
+        }
+        return this.findFamily(next, element);    
     }
     
     public Family findFamily(Integer element){
@@ -101,7 +130,8 @@ public class RNTree {
     }
     
     private void removeLeaf(Family fam){
-        fam.getParent().setSon(new Node(null), fam.getPosition());
+        Node parent = fam.getMain() == this.getRoot() ? this.aboveRoot : fam.getParent();
+        parent.setSon(new Node(null), fam.getPosition());
     }    
         
     public void remove(Integer element){

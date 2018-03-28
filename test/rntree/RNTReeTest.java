@@ -264,4 +264,19 @@ public class RNTReeTest {
         assert(tree.toString().equals(ref.toString()));                                  
     } 
     
+    @org.junit.Test()
+    public void testInsert_Case1_01(){
+        tree.insert(3);
+        tree.insert(5);
+        
+        
+        RNTree ref = new RNTree();
+        Node n3 = ref.insert(3);
+        n3.paintBlack();
+        Node n5 = n3.setNewRight(5);
+        n5.paintRed();
+
+        // tree.print(); ref.print();
+        assert(tree.toString().equals(ref.toString()));
+    }
 }

@@ -15,9 +15,7 @@ import rntree.exceptions.NotImplementedException;
 public class Node {
 
     public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_WHITE = "\u001B[37m";
-    public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
-    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
+    public static final String ANSI_RED = "\u001B[31m";
     
     private RNTree tree;
     private Node right;
@@ -96,11 +94,8 @@ public class Node {
     }
     
     public String getText() {
-        if (this.element == null) { return "□";}
-        
-        String s = ANSI_WHITE;
-        s += this.isRed() ? ANSI_RED_BACKGROUND : ANSI_BLACK_BACKGROUND;
-        s += " " + this.element.toString() + " ";
+        String s = this.isRed() ? ANSI_RED : "";
+        s += this.element == null ? "□" : this.element.toString(); 
         s += ANSI_RESET;
         return s;
     }
@@ -131,6 +126,10 @@ public class Node {
     // Set a Left or Right son based on "position"
     public Node setSon(Node son, Boolean position){
         return (position) ? this.setRight(son) : this.setLeft(son);
+    }
+
+    public Node getSon(Boolean position){
+        return (position) ? this.getRight() : this.getLeft();
     }
     
     public Boolean isSonOf(Node parent){
