@@ -207,8 +207,9 @@ public class RNTree {
                     } else {
                         String aa = n.getText();
                         line.add(aa);
+                                                
                         if (aa.length() > widest) widest = aa.length();
-
+                                                
                         next.add(n.getLeft());
                         next.add(n.getRight());
 

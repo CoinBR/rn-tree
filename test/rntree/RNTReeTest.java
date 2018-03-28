@@ -265,6 +265,19 @@ public class RNTReeTest {
     } 
     
     @org.junit.Test()
+    public void testFindFamily(){
+        tree = this.createBinTree01();
+        
+        Family f = tree.findFamily(90);
+        
+	assert(f.getMain() == tree.findNode(90));
+        assert(f.getParent() == tree.findNode(75));
+        assert(f.getBrother() == tree.findNode(60));
+        assert(f.getGrandParent() == tree.findNode(50));
+        assert(f.getUncle() == tree.findNode(25));
+    }    
+    
+    @org.junit.Test()
     public void testInsert_Case1_01(){
         tree.insert(3);
         tree.insert(5);

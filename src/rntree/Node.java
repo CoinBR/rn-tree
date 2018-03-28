@@ -15,7 +15,8 @@ import rntree.exceptions.NotImplementedException;
 public class Node {
 
     public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_BLACK_BACKGROUND = "\u001B[45m";
+    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
     
     private RNTree tree;
     private Node right;
@@ -94,10 +95,17 @@ public class Node {
     }
     
     public String getText() {
-        String s = this.isRed() ? ANSI_RED : "";
+        String s = this.element == null ? "□" : this.element.toString();
+        s += ":";
+        s += this.isRed() ? "R" : "B";
+        return s;
+        
+        /*
+        String s = this.isRed() ? ANSI_RED_BACKGROUND : ANSI_BLACK_BACKGROUND;
         s += this.element == null ? "□" : this.element.toString(); 
         s += ANSI_RESET;
         return s;
+        */
     }
 
     public Node setRight(Node right) {
