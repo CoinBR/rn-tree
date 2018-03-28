@@ -9,6 +9,7 @@ package rntree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import rntree.exceptions.*;
 
 
@@ -44,44 +45,102 @@ public class RNTree {
         return this.insert(this.aboveRoot, element); 
     }
     
-    // Helper Method
-    // In recursive operations like Insert and Remove, return wich Node
-    // will be the next to be checked based.
-    // In other words, travel left or right on the tree?
-    private Node getNext(Node ancestor, Integer element){
-        return (element <= ancestor.getElement()) ? ancestor.getLeft() : ancestor.getRight();
-    }
     
     private Node insert(Node ancestor, Integer element){
           
-        Node next = this.getNext(ancestor, element);
+        Node next = (element <= ancestor.getElement()) ? ancestor.getLeft() : ancestor.getRight();
         
         // if its a null/dull/empty leaf, place the element there
         return (next.getElement() == null) ? next.placeElement(element) : this.insert(next, element);
     }   
-   
-
-    public Node findNode(Integer element){
-        return this.findNode(this.aboveRoot, element);
-    }
-   
-    private Node findNode(Node ancestor, Integer element){
-        Node next = this.getNext(ancestor, element);
+  
+    
+    // Returns a "struct" with relevant family members
+    private Family findFamily(Node ancestor, Integer element){
+        Node next;
+        Boolean position;
+        
+        if (element <= ancestor.getElement()){
+            next = ancestor.getLeft();
+            position = false;
+        }
+        else{
+            next = ancestor.getRight();
+            position = true;
+        }
         if (next.getElement() == null) { 
             throw new IllegalArgumentException(
                     "There is no Node with this element in the tree");
         }
-        return (next.getElement() == element) ? next : this.findNode(next, element);
+        return (next.getElement() == element) ? new Family(next, position, ancestor) : this.findFamily(next, element);
     }
+    
+    public Family findFamily(Integer element){
+        return this.findFamily(this.aboveRoot, element);
+    }        
+    
+    public Node findNode(Integer element){
+        return this.findFamily(element).getMain();
+    }
+   
+    
+    // When removing a node, find/get the Node which will replace it
+    private Node findReplacementNode(Node toDel){
+        if (!toDel.hasChilds()) { 
+            return toDel;
+        }
+        if (!toDel.hasRight()){
+            return toDel.getLeft();
+        }
+        
+        Node next = toDel.getRight();         
+        while(next.getLeft().getElement() != null){
+            next = next.getLeft();
+        }
+        return next;        
+    }
+    
+    private void removeLeaf(Family fam){
+        fam.getParent().setSon(new Node(null), fam.getPosition());
+    }    
+        
+    public void remove(Integer element){
+        Family delFam = this.findFamily(element);
+        Node delNode = delFam.getMain();
+        Node repNode = this.findReplacementNode(delFam.getMain());
+        Family repFam = this.findFamily(repNode.getElement());
+             
+        if (!repNode.hasChilds()) { // or !delNode.hasChilds() 
+            this.removeLeaf(repFam);
+        }        
+        else{
+            if (repNode.hasRight()){ delNode.setRight(repNode.getRight()); }
+            if (repNode.hasLeft()){ delNode.setRight(repNode.getLeft()); }
+        }
+        delNode.swap(repNode);
+    }
+    
+ /*   public Node remove(Integer element){
+        Family toDel = this.findFamily(element); 
+        Node repNode = this.findReplacementNode(toDel.getMain());
+        Family actuallyRemoved;
+         // no childs
+        if (repNode.getElement() == null) {
+            actuallyRemoved = toDel;
+        }
+        else {
+            actuallyRemoved = this.findFamily(repNode.getElement());
+            toDel.getMain().swap(repNode);
+        }
+        System.out.println(toDel.getMain().getText());
+        Node actualReplacement = repNode != null && repNode.hasChilds() ? repNode : new Node(null);
+        // Remove from tree
+        actuallyRemoved.getParent().setSon(actualReplacement, actuallyRemoved.getPosition()); 
+        
+        return toDel.getMain();        
+    }*/
 
-    
-    public Node remove(Integer element){
-        throw new NotImplementedException();
-    }
-    
-    private Node remove(Node ancestor, Integer element){
-        throw new NotImplementedException();
-    }
+
     
 
     public void print(){

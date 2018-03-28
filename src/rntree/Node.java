@@ -47,6 +47,15 @@ public class Node {
         
         return this;
     } 
+    
+    // When deleting a node, copy the attributes of a replacement node to it
+    public Node swap(Node repNode){
+        this.setElement(repNode.getElement());
+        // this.setLeft(repNode.getLeft());
+        // this.setRight(repNode.getRight());
+        
+        return this;
+    }
  
     public void paint(Boolean color){
         if (color){
@@ -108,7 +117,19 @@ public class Node {
         return this.setRight(new Node(element));
     } 
     
+    // Set a Left or Right son based on "position"
+    public Node setSon(Node son, Boolean position){
+        return (position) ? this.setRight(son) : this.setLeft(son);
+    }
     
+    public Boolean isSonOf(Node parent){
+        return parent.getLeft() == this || parent.getRight() == this;
+    }    
+    
+    public Boolean isParentOf(Node son){
+        return son.isSonOf(this);
+    }
+        
     public Boolean hasLeft(){
         return this.hasRelative(this.left);
     }  
@@ -130,33 +151,10 @@ public class Node {
     }
     
     public Boolean hasChilds(){
-        return this.left.getElement() != null || this.right.getElement() != null;
+        Node l = this.left != null ? this.left : new Node(null);
+        Node r = this.right != null ? this.right : new Node(null);
+            return l.getElement() != null || r.getElement() != null;
     }
-    
-    public String toString(){
-        return this.toString("");
-    }
-    
-    private String toString(String oldMargin){
-        String margin = oldMargin + "   ";
-        String s = "";
-       
-        if (this.hasRight()){
-            s += margin + this.getRight().toString(margin);
-            s += margin;
-        }
-                  
-        s += this.getElement().toString() + "\n";
-
-        if (this.hasLeft()){
-            s += margin + this.getLeft().toString(margin);
-        }        
-        
-        return s;
-    }
-    
-    
-    
-    
    
+       
 }

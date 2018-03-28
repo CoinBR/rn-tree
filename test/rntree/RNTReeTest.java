@@ -210,26 +210,26 @@ public class RNTReeTest {
     public void testRemove_NoChild(){
         tree = this.createBinTree01();
         RNTree ref = this.createBinTree01();
-        
+
         tree.remove(60);
         ref.getRoot().getRight().setLeft(new Node(null));
-        assert(tree.toString() == ref.toString());
+        assert(tree.toString().equals(ref.toString()));
         
         tree.remove(20);
         ref.getRoot().getLeft().setLeft(new Node(null));
-        assert(tree.toString() == ref.toString());
+        assert(tree.toString().equals(ref.toString()));
         
         tree.remove(25);
         ref.getRoot().setLeft(new Node(null));
-        assert(tree.toString() == ref.toString());
+        assert(tree.toString().equals(ref.toString()));
         
         tree.remove(90);
         ref.getRoot().getRight().setRight(new Node(null));
-        assert(tree.toString() == ref.toString());
+        assert(tree.toString().equals(ref.toString()));
         
         tree.remove(75);
         ref.getRoot().setRight(new Node(null));
-        assert(tree.toString() == ref.toString());                  
+        assert(tree.toString().equals(ref.toString()));                  
     } 
     
     
@@ -238,17 +238,15 @@ public class RNTReeTest {
         tree = this.createBinTree03();
         RNTree ref = this.createBinTree03();
         
-
-        
         tree.remove(27);
         ref.findNode(27).setElement(29);
         ref.findNode(30).setLeft(new Node(null));
-        assert(tree.toString() == ref.toString());
-                
+        assert(tree.toString().equals(ref.toString()));
+        
         tree.remove(50);
+        ref.findNode(75).setLeft(new Node(null));        
         ref.findNode(50).setElement(60);
-        ref.findNode(60).setLeft(new Node(null));
-        assert(tree.toString() == ref.toString()); 
+        assert(tree.toString().equals(ref.toString())); 
                         
     }   
     
@@ -256,21 +254,16 @@ public class RNTReeTest {
     public void testRemove_HasChildsNearSwap(){
         tree = this.createBinTree03();
         RNTree ref = this.createBinTree03();
-        
-                
+ 
+        tree.print();
         tree.remove(25);
-        ref.findNode(25).setElement(27);
-        ref.findNode(25).setRight(ref.findNode(30));
-        assert(tree.toString() == ref.toString());
-                /*
-        tree.remove(75);
-        ref.findNode(75).setElement(60);
-        ref.findNode(25).setRight(ref.findNode(30));
-        assert(tree.toString() == ref.toString());
-        */
-        
-        
-                                  
+        tree.print();
+        Node n30 = ref.findNode(25).setRight(ref.findNode(30));
+        Node n25 = ref.findNode(25);
+        n25.setElement(27);
+        n25.setRight(n30);
+        //ref.findNode(25).setLeft(new Node(null));
+        assert(tree.toString().equals(ref.toString()));                                  
     } 
     
 }
