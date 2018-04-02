@@ -16,15 +16,16 @@ public class Family {
     private Node grandParent;
     private Node brother;
     private Node uncle;
-    
+    private Boolean isTriangle;
 
-    public Family(Node main, Boolean isRight, Node parent, Node grandParent, Node brother, Node uncle) {
+    public Family(Node main, Boolean isRight, Node parent, Node grandParent, Node brother, Node uncle, Boolean isTriangle) {
         this.main = main;
         this.isRight = isRight;
         this.parent = parent;
         this.grandParent = grandParent;
         this.brother = brother;
         this.uncle = uncle;
+        this.isTriangle = isTriangle;
     }
 
     public Node getMain() {
@@ -41,6 +42,16 @@ public class Family {
     
     public Boolean isLeft() {
         return !this.isRight();
+    }
+    
+    // Is it linked to its GrandParent by a CURVED line?
+    public Boolean isTriangle() {
+        return this.isTriangle;
+    }
+    
+    // Is it linked to its GrandParent by a STRAIGHT line?
+    public Boolean isLine() {
+        return !this.isTriangle();
     }
     
     public Boolean getPosition(){

@@ -7,6 +7,8 @@
 
 package rntree;
 
+import static java.lang.Integer.max;
+import static java.lang.Integer.min;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -53,21 +55,73 @@ public class RNTree {
         // if its a null/dull/empty leaf, place the element there
         if (next.getElement() == null) {
             Node placedNode = next.placeElement(element);
-            Family placedFam = this.findFamily(element);
-                    
-            
-            if (placedNode == this.getRoot()){
-                placedNode.paintBlack();
-            }
-            // case 1
-            else if(placedFam.getParent().isBlack()){ /* ok */  }
-            
-            
+            this.balance(this.findFamily(element));
             return placedNode;
         }
         return this.insert(next, element);
-        
     }   
+    
+    private void balance(Family fam){
+            Node node = fam.getMain();
+            
+            // case 0
+            if (node == this.getRoot()){
+                node.paintBlack();
+            }
+            
+            else if(fam.getUncle() != null){
+                
+                // case 1
+                if(fam.getUncle().isRed()){
+                    fam.getGrandParent().invertColor();
+                    fam.getParent().invertColor();
+                    fam.getUncle().invertColor();
+
+                    this.getRoot().paintBlack();
+                    this.balance(this.findFamily(fam.getGrandParent().getElement()));
+                } 
+                // cases 2 and 3 (Black Uncle)
+                else{
+                    Family rotationBase = fam.isTriangle() ? fam : this.findFamily(fam.getParent());
+                    // this.rotate(!fam.isRight(), rotationBase);  // TODO TOFIX
+                }
+            }
+    }
+    
+    
+    private void rotate(Boolean toRight, Node node){
+        this.rotate(toRight, node.getElement());
+    }
+    
+    private void rotate(Boolean toRight, Integer element){
+        this.rotate(toRight, this.findFamily(element));
+    }
+    
+    private void rotate(Boolean toRight, Family fam){
+        Boolean direction = toRight;
+        Boolean toLeft = !toRight;
+        
+        Node main = fam.getMain();
+        Node keep = main.getSon(direction);
+        Node oldTop = fam.getParent();
+        
+        Boolean grandPaSonDirection = oldTop == getRoot() ? true : !direction;
+        fam.getGrandParent().setSon(main, grandPaSonDirection);
+        
+        main.setSon(oldTop, direction);        
+        oldTop.setSon(keep, !direction);
+               
+                
+        Integer greaterValue = max(oldTop.getElement(), keep.getElement()); 
+        Node greater = oldTop.getElement() == greaterValue ? oldTop : keep;
+        Node smaller = oldTop == greater ? keep : oldTop;       
+        
+        if(        (toLeft && greater == oldTop)
+                || (toRight && smaller == oldTop))
+        {
+            oldTop.swap(keep);
+        }
+    }
   
     
     // Returns a "struct" with relevant family members
@@ -91,15 +145,17 @@ public class RNTree {
             Family parentFam;
             Node parent, grandParent, uncle, brother;
             parent = grandParent = uncle = brother = null;
+            Boolean isTriangle = null;
             
             if (ancestor != this.aboveRoot){ 
                 parentFam = this.findFamily(ancestor.getElement());
                 parent = ancestor;
                 brother = parent.getSon(!position);
-                grandParent = parentFam.getParent();                
-                uncle = (grandParent == null) ? null : grandParent.getSon(!parentFam.getPosition());                
+                grandParent = parentFam.getParent() == null ? this.aboveRoot : parentFam.getParent();                
+                uncle = grandParent.getSon(!parentFam.getPosition());
+                isTriangle = position != parentFam.isRight();
             }                  
-            return new Family(next, position, parent, grandParent, brother, uncle);
+            return new Family(next, position, parent, grandParent, brother, uncle, isTriangle);
         }
         return this.findFamily(next, element);    
     }
@@ -107,6 +163,11 @@ public class RNTree {
     public Family findFamily(Integer element){
         return this.findFamily(this.aboveRoot, element);
     }        
+    
+    
+    public Family findFamily(Node node){
+        return this.findFamily(node.getElement());
+    }
     
     public Node findNode(Integer element){
         return this.findFamily(element).getMain();

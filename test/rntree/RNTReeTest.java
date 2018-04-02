@@ -6,6 +6,7 @@
 
 package rntree;
 
+import java.lang.reflect.InvocationTargetException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,15 +18,20 @@ import static org.junit.Assert.*;
  *
  * @author User
  */
+
+
+
 public class RNTReeTest {
     
-    RNTree tree;
-    
+    private RNTree tree;
+    static private MakePublicHelper mp;
+            
     public RNTReeTest() {
     }
     
     @BeforeClass
     public static void setUpClass() {
+        mp = new MakePublicHelper();
     }
     
     @AfterClass
@@ -39,6 +45,74 @@ public class RNTReeTest {
     
     @After
     public void tearDown() {
+    }
+  
+    
+    public RNTree createManualBinTree_ToSimpleLeftRotate01(){
+        RNTree ref = new RNTree();
+        
+        Node n32 = ref.insert(32);
+        
+        Node n31 = n32.setNewLeft(31);
+        Node n35 = n32.setNewRight(35);
+        
+        Node n33 = n35.setNewLeft(33);
+        Node n36 = n35.setNewRight(36);
+        
+        Node n38 = n36.setNewRight(38);
+        
+        return ref;
+    }
+    
+    public RNTree createManualBinTree_ToSimpleRightRotate01(){
+        RNTree ref = new RNTree();
+        
+        Node n50 = ref.insert(50);
+        
+        Node n20 = n50.setNewLeft(20);
+        Node n70 = n50.setNewRight(70);
+        
+        Node n10 = n20.setNewLeft(10);
+        Node n30 = n20.setNewRight(30);
+        
+        Node n5 = n10.setNewLeft(5);
+   
+        return ref;
+    }
+    
+    public RNTree createManualRNTree01(){
+        RNTree t = new RNTree();
+        
+        Node root = t.insert(30);
+        root.paintBlack();
+        
+        Node n20 = root.setNewLeft(20);
+        n20.paintBlack();
+        
+        Node n50 = root.setNewRight(50);
+        n50.paintRed();
+        
+        Node n40 = n50.setNewLeft(40);
+        n40.paintBlack();
+        
+        Node n60 = n50.setNewRight(60);
+        n60.paintBlack();
+        
+        Node n70 = n60.setNewRight(70);
+        n70.paintRed();
+        
+        return t;
+    }
+    
+    public RNTree createRNTree01(){
+        RNTree t = new RNTree();
+        t.insert(30);
+        t.insert(20);
+        t.insert(50);
+        t.insert(40);
+        t.insert(60);
+        t.insert(70);
+        return t;
     }
     
     public RNTree createBinTree01(){
@@ -54,6 +128,70 @@ public class RNTReeTest {
         
         return t;
     }    
+    
+
+    public RNTree createManualRNTree02(){
+        RNTree t = new RNTree();
+        
+        Node root = t.insert(30);
+        root.paintBlack();
+        
+        Node n13 = root.setNewLeft(13);
+        n13.paintBlack();
+        
+        Node n8 = n13.setNewLeft(8);
+        n8.paintBlack();
+        
+        Node n23 = n13.setNewRight(23);
+        n23.paintBlack();
+        
+        Node n25 = n23.setNewRight(25);
+        n25.paintRed();
+        
+        Node n53 = root.setNewRight(53);
+        n53.paintBlack();
+        
+        Node n43 = n53.setNewLeft(43);
+        n43.paintBlack();
+        
+        Node n83 = n53.setNewRight(83);
+        n83.paintRed();        
+        
+        Node n63 = n83.setNewLeft(63);
+        n63.paintBlack();
+        
+        Node n93 = n83.setNewRight(93);
+        n93.paintBlack();
+        
+        Node n96 = n93.setNewRight(96);
+        n96.paintRed();
+        
+        return t;        
+    }    
+    
+    public RNTree createRNTree02(){
+        RNTree t = new RNTree();
+ 
+        t.insert(30);
+        
+        t.insert(13);
+        t.insert(53);
+        
+        t.insert(8);
+        t.insert(23);
+        t.insert(43);
+        t.insert(83);
+        
+        t.insert(25);
+        t.insert(63);
+        t.insert(93);
+        
+        t.insert(96);
+        
+        return t;
+    }
+    
+    
     public RNTree createBinTree02(){
         RNTree t = createBinTree01();
         t.insert(27); 
@@ -278,7 +416,7 @@ public class RNTReeTest {
     }    
     
     @org.junit.Test()
-    public void testInsert_Case1_01(){
+    public void testInsertRN_DoNothingCase(){
         tree.insert(3);
         tree.insert(5);
         
@@ -292,4 +430,66 @@ public class RNTReeTest {
         // tree.print(); ref.print();
         assert(tree.toString().equals(ref.toString()));
     }
+    
+    @org.junit.Test()
+    public void testInsertRN_Case1_01(){
+        
+        this.tree = this.createRNTree01();
+        RNTree ref = this.createManualRNTree01();
+        // tree.print(); ref.print();
+        assert(tree.toString().equals(ref.toString()));
+    }
+    
+    
+    @org.junit.Test()
+    public void testInsertRN_Case1_02(){
+        
+        this.tree = this.createRNTree02();
+        RNTree ref = this.createManualRNTree02();
+        // tree.print(); ref.print();
+        assert(tree.toString().equals(ref.toString()));
+    }
+
+    @org.junit.Test()
+    public void testSimpleLeftRotation_01() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException{
+        
+        this.tree = this.createManualBinTree_ToSimpleLeftRotate01();
+        RNTree ref = this.createManualBinTree_ToSimpleLeftRotate01();
+               
+        Node n35 = ref.findNode(35);
+        Node n32 = ref.findNode(32);
+        Node n33 = ref.findNode(33);
+        
+        n32.setRight(n33);
+        n35.setLeft(n32);
+        
+        Node aboveRoot = (Node) mp.get(ref, "aboveRoot");
+        aboveRoot.setRight(n35);
+        mp.invoke(this.tree, "rotate", false, 35);
+        
+        // tree.print(); ref.print();
+        assert(tree.toString().equals(ref.toString()));
+    }       
+    
+    @org.junit.Test()
+    public void testSimpleRightRotation_01() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException{
+        
+        this.tree = this.createManualBinTree_ToSimpleRightRotate01();
+        RNTree ref = this.createManualBinTree_ToSimpleRightRotate01();
+               
+        Node n20 = ref.findNode(20);
+        Node n50 = ref.findNode(50);
+        Node n30 = ref.findNode(30);
+        
+        n50.setLeft(n30);
+        n20.setRight(n50);
+        
+        Node aboveRoot = (Node) mp.get(ref, "aboveRoot");
+        aboveRoot.setRight(n20);
+        mp.invoke(this.tree, "rotate", true, 20);
+
+        // tree.print(); ref.print();
+        assert(tree.toString().equals(ref.toString()));
+    }       
+    
 }
