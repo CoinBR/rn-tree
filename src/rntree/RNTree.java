@@ -69,8 +69,8 @@ public class RNTree {
                 node.paintBlack();
             }
             
-            else if(fam.getUncle() != null){
-                
+            // Sons of root have an unreal uncle. Ignore it
+            else if(fam.getGrandParent() != this.aboveRoot && fam.getUncle() != null){               
                 // case 1
                 if(fam.getUncle().isRed()){
                     fam.getGrandParent().invertColor();
@@ -83,7 +83,7 @@ public class RNTree {
                 // cases 2 and 3 (Black Uncle)
                 else{
                     Family rotationBase = fam.isTriangle() ? fam : this.findFamily(fam.getParent());
-                    // this.rotate(!fam.isRight(), rotationBase);  // TODO TOFIX
+                    this.rotate(!fam.isRight(), rotationBase);  // TODO TOFIX
                 }
             }
     }

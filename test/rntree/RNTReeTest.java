@@ -237,6 +237,7 @@ public class RNTReeTest {
               
        tree.remove(1);
        assert(tree.isEmpty());
+       
     }  
     
     @org.junit.Test
@@ -436,7 +437,7 @@ public class RNTReeTest {
         
         this.tree = this.createRNTree01();
         RNTree ref = this.createManualRNTree01();
-        // tree.print(); ref.print();
+        tree.print(); ref.print();
         assert(tree.toString().equals(ref.toString()));
     }
     
