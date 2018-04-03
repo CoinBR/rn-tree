@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="18" failures="0" hostname="MQ-XX" name="rntree.RNTReeTest" skipped="0" tests="22" time="0.141" timestamp="2018-04-02T22:18:32">
+<testsuite errors="3" failures="0" hostname="MQ-XX" name="rntree.RNTReeTest" skipped="0" tests="24" time="0.151" timestamp="2018-04-03T15:13:09">
   <properties>
     <property name="netbeans.autoupdate.country" value="BR" />
     <property name="nb.wait.for.caches" value="true" />
@@ -40,7 +40,7 @@
     <property name="user.name" value="User" />
     <property name="copylibs.rebase" value="true" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner rntree.RNTReeTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,D:\RNTRee\build\test\results\TEST-rntree.RNTReeTest.xml crashfile=D:\RNTRee\build\junitvmwatcher2824068606897577068.properties propsfile=D:\RNTRee\build\junit4200110217057459439.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner rntree.RNTReeTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,D:\RNTRee\build\test\results\TEST-rntree.RNTReeTest.xml crashfile=D:\RNTRee\build\junitvmwatcher2890894448626774416.properties propsfile=D:\RNTRee\build\junit3466268878079518911.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -316,228 +316,68 @@
     <property name="platform.active" value="default_platform" />
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
   </properties>
-  <testcase classname="rntree.RNTReeTest" name="testRemove_HasChildsFarAway" time="0.0">
+  <testcase classname="rntree.RNTReeTest" name="testRemove_HasChildsFarAway" time="0.007">
     <error type="java.lang.NullPointerException">java.lang.NullPointerException
-	at rntree.RNTree.rotate(RNTree.java:115)
-	at rntree.RNTree.balance(RNTree.java:86)
+	at rntree.RNTree.findFamily(RNTree.java:150)
+	at rntree.RNTree.findFamily(RNTree.java:182)
+	at rntree.RNTree.findFamily(RNTree.java:187)
+	at rntree.RNTree.balance(RNTree.java:97)
+	at rntree.RNTree.balance(RNTree.java:91)
 	at rntree.RNTree.insert(RNTree.java:58)
 	at rntree.RNTree.insert(RNTree.java:61)
 	at rntree.RNTree.insert(RNTree.java:61)
+	at rntree.RNTree.insert(RNTree.java:61)
+	at rntree.RNTree.insert(RNTree.java:61)
 	at rntree.RNTree.insert(RNTree.java:47)
-	at rntree.RNTReeTest.createBinTree01(RNTReeTest.java:123)
-	at rntree.RNTReeTest.createBinTree02(RNTReeTest.java:196)
+	at rntree.RNTReeTest.createBinTree02(RNTReeTest.java:199)
 	at rntree.RNTReeTest.createBinTree03(RNTReeTest.java:203)
 	at rntree.RNTReeTest.testRemove_HasChildsFarAway(RNTReeTest.java:377)
 </error>
   </testcase>
-  <testcase classname="rntree.RNTReeTest" name="testRemove_NoChild" time="0.0">
+  <testcase classname="rntree.RNTReeTest" name="testInsertRN_AllCases_01" time="0.012" />
+  <testcase classname="rntree.RNTReeTest" name="testRemove_NoChild" time="0.003" />
+  <testcase classname="rntree.RNTReeTest" name="testFindFamily" time="0.0" />
+  <testcase classname="rntree.RNTReeTest" name="testRemove_HasChildsNearSwap" time="0.001">
     <error type="java.lang.NullPointerException">java.lang.NullPointerException
-	at rntree.RNTree.rotate(RNTree.java:115)
-	at rntree.RNTree.balance(RNTree.java:86)
+	at rntree.RNTree.findFamily(RNTree.java:150)
+	at rntree.RNTree.findFamily(RNTree.java:182)
+	at rntree.RNTree.findFamily(RNTree.java:187)
+	at rntree.RNTree.balance(RNTree.java:97)
+	at rntree.RNTree.balance(RNTree.java:91)
 	at rntree.RNTree.insert(RNTree.java:58)
 	at rntree.RNTree.insert(RNTree.java:61)
 	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:47)
-	at rntree.RNTReeTest.createBinTree01(RNTReeTest.java:123)
-	at rntree.RNTReeTest.testRemove_NoChild(RNTReeTest.java:350)
-</error>
-  </testcase>
-  <testcase classname="rntree.RNTReeTest" name="testFindFamily" time="0.0">
-    <error type="java.lang.NullPointerException">java.lang.NullPointerException
-	at rntree.RNTree.rotate(RNTree.java:115)
-	at rntree.RNTree.balance(RNTree.java:86)
-	at rntree.RNTree.insert(RNTree.java:58)
 	at rntree.RNTree.insert(RNTree.java:61)
 	at rntree.RNTree.insert(RNTree.java:61)
 	at rntree.RNTree.insert(RNTree.java:47)
-	at rntree.RNTReeTest.createBinTree01(RNTReeTest.java:123)
-	at rntree.RNTReeTest.testFindFamily(RNTReeTest.java:408)
-</error>
-  </testcase>
-  <testcase classname="rntree.RNTReeTest" name="testRemove_HasChildsNearSwap" time="0.0">
-    <error type="java.lang.NullPointerException">java.lang.NullPointerException
-	at rntree.RNTree.rotate(RNTree.java:115)
-	at rntree.RNTree.balance(RNTree.java:86)
-	at rntree.RNTree.insert(RNTree.java:58)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:47)
-	at rntree.RNTReeTest.createBinTree01(RNTReeTest.java:123)
-	at rntree.RNTReeTest.createBinTree02(RNTReeTest.java:196)
+	at rntree.RNTReeTest.createBinTree02(RNTReeTest.java:199)
 	at rntree.RNTReeTest.createBinTree03(RNTReeTest.java:203)
 	at rntree.RNTReeTest.testRemove_HasChildsNearSwap(RNTReeTest.java:394)
 </error>
   </testcase>
-  <testcase classname="rntree.RNTReeTest" name="testInsertBin01" time="0.0">
-    <error type="java.lang.NullPointerException">java.lang.NullPointerException
-	at rntree.RNTree.rotate(RNTree.java:115)
-	at rntree.RNTree.balance(RNTree.java:86)
-	at rntree.RNTree.insert(RNTree.java:58)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:47)
-	at rntree.RNTReeTest.createBinTree01(RNTReeTest.java:123)
-	at rntree.RNTReeTest.testInsertBin01(RNTReeTest.java:251)
-</error>
-  </testcase>
-  <testcase classname="rntree.RNTReeTest" name="testInsertRN_Case1_01" time="0.0">
-    <error type="java.lang.NullPointerException">java.lang.NullPointerException
-	at rntree.RNTree.rotate(RNTree.java:115)
-	at rntree.RNTree.balance(RNTree.java:86)
-	at rntree.RNTree.insert(RNTree.java:58)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:47)
-	at rntree.RNTReeTest.createRNTree01(RNTReeTest.java:114)
-	at rntree.RNTReeTest.testInsertRN_Case1_01(RNTReeTest.java:438)
-</error>
-  </testcase>
-  <testcase classname="rntree.RNTReeTest" name="testInsertRN_Case1_02" time="0.0">
-    <error type="java.lang.NullPointerException">java.lang.NullPointerException
-	at rntree.RNTree.rotate(RNTree.java:115)
-	at rntree.RNTree.balance(RNTree.java:86)
-	at rntree.RNTree.insert(RNTree.java:58)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:47)
-	at rntree.RNTReeTest.createRNTree02(RNTReeTest.java:181)
-	at rntree.RNTReeTest.testInsertRN_Case1_02(RNTReeTest.java:448)
-</error>
-  </testcase>
-  <testcase classname="rntree.RNTReeTest" name="testFindInvalidNode01" time="0.0">
-    <error message="Unexpected exception, expected&lt;java.lang.IllegalArgumentException&gt; but was&lt;java.lang.NullPointerException&gt;" type="java.lang.Exception">java.lang.Exception: Unexpected exception, expected&lt;java.lang.IllegalArgumentException&gt; but was&lt;java.lang.NullPointerException&gt;
-Caused by: java.lang.NullPointerException
-	at rntree.RNTree.rotate(RNTree.java:115)
-	at rntree.RNTree.balance(RNTree.java:86)
-	at rntree.RNTree.insert(RNTree.java:58)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:47)
-	at rntree.RNTReeTest.createBinTree01(RNTReeTest.java:123)
-	at rntree.RNTReeTest.testFindInvalidNode01(RNTReeTest.java:292)
-</error>
-  </testcase>
-  <testcase classname="rntree.RNTReeTest" name="testFindInvalidNode02" time="0.0">
-    <error message="Unexpected exception, expected&lt;java.lang.IllegalArgumentException&gt; but was&lt;java.lang.NullPointerException&gt;" type="java.lang.Exception">java.lang.Exception: Unexpected exception, expected&lt;java.lang.IllegalArgumentException&gt; but was&lt;java.lang.NullPointerException&gt;
-Caused by: java.lang.NullPointerException
-	at rntree.RNTree.rotate(RNTree.java:115)
-	at rntree.RNTree.balance(RNTree.java:86)
-	at rntree.RNTree.insert(RNTree.java:58)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:47)
-	at rntree.RNTReeTest.createBinTree01(RNTReeTest.java:123)
-	at rntree.RNTReeTest.testFindInvalidNode02(RNTReeTest.java:298)
-</error>
-  </testcase>
-  <testcase classname="rntree.RNTReeTest" name="testFindInvalidNode03" time="0.0">
-    <error message="Unexpected exception, expected&lt;java.lang.IllegalArgumentException&gt; but was&lt;java.lang.NullPointerException&gt;" type="java.lang.Exception">java.lang.Exception: Unexpected exception, expected&lt;java.lang.IllegalArgumentException&gt; but was&lt;java.lang.NullPointerException&gt;
-Caused by: java.lang.NullPointerException
-	at rntree.RNTree.rotate(RNTree.java:115)
-	at rntree.RNTree.balance(RNTree.java:86)
-	at rntree.RNTree.insert(RNTree.java:58)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:47)
-	at rntree.RNTReeTest.createBinTree01(RNTReeTest.java:123)
-	at rntree.RNTReeTest.testFindInvalidNode03(RNTReeTest.java:304)
-</error>
-  </testcase>
-  <testcase classname="rntree.RNTReeTest" name="testGetRoot" time="0.0">
-    <error type="java.lang.NullPointerException">java.lang.NullPointerException
-	at rntree.RNTree.rotate(RNTree.java:115)
-	at rntree.RNTree.balance(RNTree.java:86)
-	at rntree.RNTree.insert(RNTree.java:58)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:47)
-	at rntree.RNTReeTest.createBinTree01(RNTReeTest.java:123)
-	at rntree.RNTReeTest.testGetRoot(RNTReeTest.java:245)
-</error>
-  </testcase>
-  <testcase classname="rntree.RNTReeTest" name="testFindNode" time="0.0">
-    <error type="java.lang.NullPointerException">java.lang.NullPointerException
-	at rntree.RNTree.rotate(RNTree.java:115)
-	at rntree.RNTree.balance(RNTree.java:86)
-	at rntree.RNTree.insert(RNTree.java:58)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:47)
-	at rntree.RNTReeTest.createBinTree01(RNTReeTest.java:123)
-	at rntree.RNTReeTest.testFindNode(RNTReeTest.java:270)
-</error>
-  </testcase>
-  <testcase classname="rntree.RNTReeTest" name="testRemove01" time="0.0">
-    <error message="Unexpected exception, expected&lt;java.lang.IllegalArgumentException&gt; but was&lt;java.lang.NullPointerException&gt;" type="java.lang.Exception">java.lang.Exception: Unexpected exception, expected&lt;java.lang.IllegalArgumentException&gt; but was&lt;java.lang.NullPointerException&gt;
-Caused by: java.lang.NullPointerException
-	at rntree.RNTree.rotate(RNTree.java:115)
-	at rntree.RNTree.balance(RNTree.java:86)
-	at rntree.RNTree.insert(RNTree.java:58)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:47)
-	at rntree.RNTReeTest.createBinTree01(RNTReeTest.java:123)
-	at rntree.RNTReeTest.testRemove01(RNTReeTest.java:310)
-</error>
-  </testcase>
-  <testcase classname="rntree.RNTReeTest" name="testRemove02" time="0.0">
-    <error message="Unexpected exception, expected&lt;java.lang.IllegalArgumentException&gt; but was&lt;java.lang.NullPointerException&gt;" type="java.lang.Exception">java.lang.Exception: Unexpected exception, expected&lt;java.lang.IllegalArgumentException&gt; but was&lt;java.lang.NullPointerException&gt;
-Caused by: java.lang.NullPointerException
-	at rntree.RNTree.rotate(RNTree.java:115)
-	at rntree.RNTree.balance(RNTree.java:86)
-	at rntree.RNTree.insert(RNTree.java:58)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:47)
-	at rntree.RNTReeTest.createBinTree01(RNTReeTest.java:123)
-	at rntree.RNTReeTest.testRemove02(RNTReeTest.java:318)
-</error>
-  </testcase>
-  <testcase classname="rntree.RNTReeTest" name="testRemove03" time="0.0">
-    <error message="Unexpected exception, expected&lt;java.lang.IllegalArgumentException&gt; but was&lt;java.lang.NullPointerException&gt;" type="java.lang.Exception">java.lang.Exception: Unexpected exception, expected&lt;java.lang.IllegalArgumentException&gt; but was&lt;java.lang.NullPointerException&gt;
-Caused by: java.lang.NullPointerException
-	at rntree.RNTree.rotate(RNTree.java:115)
-	at rntree.RNTree.balance(RNTree.java:86)
-	at rntree.RNTree.insert(RNTree.java:58)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:47)
-	at rntree.RNTReeTest.createBinTree01(RNTReeTest.java:123)
-	at rntree.RNTReeTest.testRemove03(RNTReeTest.java:326)
-</error>
-  </testcase>
-  <testcase classname="rntree.RNTReeTest" name="testRemove04" time="0.0">
-    <error message="Unexpected exception, expected&lt;java.lang.IllegalArgumentException&gt; but was&lt;java.lang.NullPointerException&gt;" type="java.lang.Exception">java.lang.Exception: Unexpected exception, expected&lt;java.lang.IllegalArgumentException&gt; but was&lt;java.lang.NullPointerException&gt;
-Caused by: java.lang.NullPointerException
-	at rntree.RNTree.rotate(RNTree.java:115)
-	at rntree.RNTree.balance(RNTree.java:86)
-	at rntree.RNTree.insert(RNTree.java:58)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:47)
-	at rntree.RNTReeTest.createBinTree01(RNTReeTest.java:123)
-	at rntree.RNTReeTest.testRemove04(RNTReeTest.java:334)
-</error>
-  </testcase>
-  <testcase classname="rntree.RNTReeTest" name="testRemove05" time="0.0">
-    <error message="Unexpected exception, expected&lt;java.lang.IllegalArgumentException&gt; but was&lt;java.lang.NullPointerException&gt;" type="java.lang.Exception">java.lang.Exception: Unexpected exception, expected&lt;java.lang.IllegalArgumentException&gt; but was&lt;java.lang.NullPointerException&gt;
-Caused by: java.lang.NullPointerException
-	at rntree.RNTree.rotate(RNTree.java:115)
-	at rntree.RNTree.balance(RNTree.java:86)
-	at rntree.RNTree.insert(RNTree.java:58)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:61)
-	at rntree.RNTree.insert(RNTree.java:47)
-	at rntree.RNTReeTest.createBinTree01(RNTReeTest.java:123)
-	at rntree.RNTReeTest.testRemove05(RNTReeTest.java:342)
-</error>
-  </testcase>
+  <testcase classname="rntree.RNTReeTest" name="testInsertBin01" time="0.0" />
+  <testcase classname="rntree.RNTReeTest" name="testInsertRN_Case1_01" time="0.005" />
+  <testcase classname="rntree.RNTReeTest" name="testInsertRN_Case1_02" time="0.016" />
+  <testcase classname="rntree.RNTReeTest" name="testInsertRN_Case3_01" time="0.0" />
+  <testcase classname="rntree.RNTReeTest" name="testFindInvalidNode01" time="0.0" />
+  <testcase classname="rntree.RNTReeTest" name="testFindInvalidNode02" time="0.0" />
+  <testcase classname="rntree.RNTReeTest" name="testFindInvalidNode03" time="0.0" />
+  <testcase classname="rntree.RNTReeTest" name="testGetRoot" time="0.012" />
+  <testcase classname="rntree.RNTReeTest" name="testFindNode" time="0.0" />
+  <testcase classname="rntree.RNTReeTest" name="testRemove01" time="0.0" />
+  <testcase classname="rntree.RNTReeTest" name="testRemove02" time="0.002" />
+  <testcase classname="rntree.RNTReeTest" name="testRemove03" time="0.0" />
+  <testcase classname="rntree.RNTReeTest" name="testRemove04" time="0.001" />
+  <testcase classname="rntree.RNTReeTest" name="testRemove05" time="0.0" />
   <testcase classname="rntree.RNTReeTest" name="testInsertRN_DoNothingCase" time="0.0" />
-  <testcase classname="rntree.RNTReeTest" name="testSimpleRightRotation_01" time="0.0" />
+  <testcase classname="rntree.RNTReeTest" name="testSimpleRightRotation_01" time="0.001" />
   <testcase classname="rntree.RNTReeTest" name="testIsEmpty" time="0.0">
     <error type="java.lang.NullPointerException">java.lang.NullPointerException
-	at rntree.RNTree.rotate(RNTree.java:115)
-	at rntree.RNTree.balance(RNTree.java:86)
+	at rntree.RNTree.findFamily(RNTree.java:150)
+	at rntree.RNTree.findFamily(RNTree.java:182)
+	at rntree.RNTree.findFamily(RNTree.java:187)
+	at rntree.RNTree.balance(RNTree.java:97)
+	at rntree.RNTree.balance(RNTree.java:91)
 	at rntree.RNTree.insert(RNTree.java:58)
 	at rntree.RNTree.insert(RNTree.java:61)
 	at rntree.RNTree.insert(RNTree.java:61)
@@ -545,8 +385,26 @@ Caused by: java.lang.NullPointerException
 	at rntree.RNTReeTest.testIsEmpty(RNTReeTest.java:229)
 </error>
   </testcase>
-  <testcase classname="rntree.RNTReeTest" name="testSimpleLeftRotation_01" time="0.016" />
+  <testcase classname="rntree.RNTReeTest" name="testSimpleLeftRotation_01" time="0.001" />
   <testcase classname="rntree.RNTReeTest" name="testInsertInvalidBin01" time="0.0" />
-  <system-out><![CDATA[]]></system-out>
+  <system-out><![CDATA[                                                              12:B                                                              
+                                ?????????????????????????????????????????????????????????????????                               
+                               8:R                                                            15:R                              
+                ?????????????????????????????????                               ?????????????????????????????????               
+               5:B                             9:B                            13:B                            19:B              
+        ?????????????????               ?????????????????               ?????????????????               ?????????????????       
+       ?:B             ?:B             ?:B            10:R             ?:B             ?:B             ?:B            23:R      
+                                                    ?????????                                                       ?????????   
+                                                   ?:B     ?:B                                                     ?:B     ?:B  
+                                                              12:B                                                              
+                                ?????????????????????????????????????????????????????????????????                               
+                               8:R                                                            15:R                              
+                ?????????????????????????????????                               ?????????????????????????????????               
+               5:B                             9:B                            13:B                            19:B              
+        ?????????????????               ?????????????????               ?????????????????               ?????????????????       
+       ?:B             ?:B             ?:B            10:R             ?:B             ?:B             ?:B            23:R      
+                                                    ?????????                                                       ?????????   
+                                                   ?:B     ?:B                                                     ?:B     ?:B  
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

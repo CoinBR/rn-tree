@@ -117,14 +117,14 @@ public class RNTReeTest {
     
     public RNTree createBinTree01(){
         RNTree t = new RNTree();
-        t.insert(50);
+        Node n50 = t.insert(50);
         
-        t.insert(25);
-        t.insert(20);
+        Node n25 = n50.setNewLeft(25);
+        Node n75 = n50.setNewRight(75);
         
-        t.insert(75);
-        t.insert(60);
-        t.insert(90);
+        Node n20 = n25.setNewLeft(20);
+        Node n60 = n75.setNewLeft(60);
+        Node n90 = n75.setNewRight(90);
         
         return t;
     }    
@@ -228,10 +228,10 @@ public class RNTReeTest {
        
        tree.insert(3);
        assert(!tree.isEmpty());
-       
+              
        tree.remove(3);
        assert(!tree.isEmpty());
-       
+ 
        tree.remove(2);
        assert(!tree.isEmpty());   
               
@@ -242,8 +242,8 @@ public class RNTReeTest {
     
     @org.junit.Test
     public void testGetRoot(){
-        tree = this.createBinTree01();
-        assert(tree.getRoot().getElement() == 50);
+        tree = this.createManualRNTree01();
+        assert(tree.getRoot().getElement() == 30);
     }
     
     @org.junit.Test
@@ -437,7 +437,7 @@ public class RNTReeTest {
         
         this.tree = this.createRNTree01();
         RNTree ref = this.createManualRNTree01();
-        tree.print(); ref.print();
+        // tree.print(); ref.print();
         assert(tree.toString().equals(ref.toString()));
     }
     
@@ -448,6 +448,71 @@ public class RNTReeTest {
         this.tree = this.createRNTree02();
         RNTree ref = this.createManualRNTree02();
         // tree.print(); ref.print();
+        assert(tree.toString().equals(ref.toString()));
+    }
+    
+    @org.junit.Test()
+    public void testInsertRN_Case3_01(){
+        tree.insert(15);
+        tree.insert(5);
+        tree.insert(1);
+        
+        RNTree ref = new RNTree();
+        Node n5 = ref.insert(5);
+        n5.paintBlack();
+        
+        Node n1 = n5.setNewLeft(1);
+        n1.paintRed();
+
+        Node n15 = n5.setNewRight(15);
+        n15.paintRed();
+        
+        // tree.print(); ref.print();
+        assert(tree.toString().equals(ref.toString()));
+    }   
+    
+    @org.junit.Test()
+    public void testInsertRN_AllCases_01(){
+        tree.insert(8);
+        tree.insert(5);
+        tree.insert(15);
+        tree.insert(12);
+        tree.insert(19);
+        tree.insert(9);
+        tree.insert(13);
+        tree.insert(23);
+
+        tree.insert(10); // Many Balance Operations Happens Here
+        
+        RNTree ref = new RNTree();
+        Node n12 = ref.insert(12);
+        n12.paintBlack();
+        
+        Node n8 = n12.setNewLeft(8);
+        n8.paintRed();
+
+        Node n15 = n12.setNewRight(15);
+        n15.paintRed();
+        
+        Node n5 = n8.setNewLeft(5);
+        n5.paintBlack();
+        
+        Node n9 = n8.setNewRight(9);
+        n9.paintBlack();
+        
+        Node n10 = n9.setNewRight(10);
+        n10.paintRed();
+        
+        Node n13 = n15.setNewLeft(13);
+        n13.paintBlack();
+        
+        Node n19 = n15.setNewRight(19);
+        n19.paintBlack();
+        
+        Node n23 = n19.setNewRight(23);
+        n23.paintRed();
+        
+        tree.print(); ref.print();
         assert(tree.toString().equals(ref.toString()));
     }
 

@@ -163,7 +163,7 @@ public class Node {
     public Integer getElement() {
         return element;
     }
-
+    
     public void setElement(Integer element) {
         this.element = element;
     }

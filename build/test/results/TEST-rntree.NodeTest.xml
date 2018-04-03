@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="MQ-XX" name="rntree.NodeTest" skipped="0" tests="6" time="0.063" timestamp="2018-04-02T22:18:32">
+<testsuite errors="0" failures="0" hostname="MQ-XX" name="rntree.NodeTest" skipped="0" tests="6" time="0.07" timestamp="2018-04-03T15:13:08">
   <properties>
     <property name="netbeans.autoupdate.country" value="BR" />
     <property name="nb.wait.for.caches" value="true" />
@@ -40,7 +40,7 @@
     <property name="user.name" value="User" />
     <property name="copylibs.rebase" value="true" />
     <property name="libs.swing-layout.maven-pom" value="" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner rntree.NodeTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,D:\RNTRee\build\test\results\TEST-rntree.NodeTest.xml crashfile=D:\RNTRee\build\junitvmwatcher6251180417230704535.properties propsfile=D:\RNTRee\build\junit4391209878767886434.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner rntree.NodeTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,D:\RNTRee\build\test\results\TEST-rntree.NodeTest.xml crashfile=D:\RNTRee\build\junitvmwatcher9103043530005517399.properties propsfile=D:\RNTRee\build\junit4707445970952705167.properties" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="netbeans.accept_license_class" value="org.netbeans.license.AcceptLicense" />
     <property name="build.sysclasspath" value="ignore" />
@@ -316,7 +316,7 @@
     <property name="platform.active" value="default_platform" />
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit" />
   </properties>
-  <testcase classname="rntree.NodeTest" name="testGetSetNode" time="0.0" />
+  <testcase classname="rntree.NodeTest" name="testGetSetNode" time="0.002" />
   <testcase classname="rntree.NodeTest" name="testPaint" time="0.0" />
   <testcase classname="rntree.NodeTest" name="testSetNewNode" time="0.0" />
   <testcase classname="rntree.NodeTest" name="testHasChilds" time="0.0" />

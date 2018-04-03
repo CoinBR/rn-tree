@@ -64,28 +64,37 @@ public class RNTree {
     private void balance(Family fam){
             Node node = fam.getMain();
             
-            // case 0
-            if (node == this.getRoot()){
-                node.paintBlack();
-            }
+            this.getRoot().paintBlack();
             
             // Sons of root have an unreal uncle. Ignore it
-            else if(fam.getGrandParent() != this.aboveRoot && fam.getUncle() != null){               
+            if(fam.getGrandParent() != this.aboveRoot
+                    && fam.getUncle() != null
+                    && node != this.getRoot()
+                    && fam.getParent().isRed()){               
                 // case 1
                 if(fam.getUncle().isRed()){
                     fam.getGrandParent().invertColor();
                     fam.getParent().invertColor();
                     fam.getUncle().invertColor();
 
-                    this.getRoot().paintBlack();
-                    this.balance(this.findFamily(fam.getGrandParent().getElement()));
+                    this.balance(fam.getGrandParent());
                 } 
                 // cases 2 and 3 (Black Uncle)
                 else{
                     Family rotationBase = fam.isTriangle() ? fam : this.findFamily(fam.getParent());
-                    this.rotate(!fam.isRight(), rotationBase);  // TODO TOFIX
+                    this.rotate(!fam.isRight(), rotationBase);
+                    // case 3
+                    if (fam.isLine()){
+                        fam.getParent().invertColor();
+                        fam.getGrandParent().invertColor();
+                    }
+                    this.balance(rotationBase.getMain().getSon(!fam.isRight())); // to double check
                 }
             }
+    }
+    
+    private void balance(Node base){
+        this.balance(this.findFamily(base));
     }
     
     
@@ -105,16 +114,15 @@ public class RNTree {
         Node keep = main.getSon(direction);
         Node oldTop = fam.getParent();
         
-        Boolean grandPaSonDirection = oldTop == getRoot() ? true : !direction;
+        // If grandpa is aboveRoot, its child/son will always be on right side
+        Boolean grandPaSonDirection = oldTop == getRoot() ? true : direction;
         fam.getGrandParent().setSon(main, grandPaSonDirection);
         
         main.setSon(oldTop, direction);        
         oldTop.setSon(keep, !direction);
-               
                 
-        Integer greaterValue = max(oldTop.getElement(), keep.getElement()); 
-        Node greater = oldTop.getElement() == greaterValue ? oldTop : keep;
-        Node smaller = oldTop == greater ? keep : oldTop;       
+        Node greater = this.getNodeWithGreaterElement(oldTop, keep);
+        Node smaller = this.getNodeWithSmallerElement(oldTop, keep);       
         
         if(        (toLeft && greater == oldTop)
                 || (toRight && smaller == oldTop))
@@ -122,7 +130,17 @@ public class RNTree {
             oldTop.swap(keep);
         }
     }
-  
+ 
+    
+    private Node getNodeWithGreaterElement(Node na, Node nb){
+         Integer a = na.getElement() == null ? Integer.MIN_VALUE : na.getElement();
+         Integer b = nb.getElement() == null ? Integer.MIN_VALUE : nb.getElement();
+         return a > b ? na : nb;
+    }
+    
+    private Node getNodeWithSmallerElement(Node na, Node nb){
+         return this.getNodeWithGreaterElement(na, nb) == na ? nb : na;
+    }    
     
     // Returns a "struct" with relevant family members
     private Family findFamily(Node ancestor, Integer element){
