@@ -88,9 +88,9 @@ public class RNTree {
                         fam.getParent().invertColor();
                         fam.getGrandParent().invertColor();
                     }
-                    // TODO FIX
-                    //Node nextToCheck = rotationBase.getMain().getSon(!fam.isRight());
-                    //if (nextToCheck.getElement() != null) this.balance(nextToCheck);
+                    Node nextToCheck = rotationBase.getMain().getSon(!fam.isRight());
+                    System.out.println(nextToCheck.getElement());
+                    if (nextToCheck.getElement() != null) this.balance(nextToCheck);
                 }
             }
     }

@@ -226,11 +226,11 @@ public class RNTReeTest {
        
        tree.insert(2);
        assert(!tree.isEmpty());
-       tree.print();
+       // tree.print();
        
        tree.insert(3);
        assert(!tree.isEmpty());    
-       //tree.print();
+       tree.print();
       
        tree.remove(3);
        assert(!tree.isEmpty());
