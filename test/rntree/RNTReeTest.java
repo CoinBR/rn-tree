@@ -221,17 +221,20 @@ public class RNTReeTest {
        assert(tree.isEmpty());
        
        tree.insert(1);
-       assert(!tree.isEmpty());       
+       assert(!tree.isEmpty());   
+       //tree.print();
        
        tree.insert(2);
        assert(!tree.isEmpty());
+       tree.print();
        
        tree.insert(3);
-       assert(!tree.isEmpty());
-              
+       assert(!tree.isEmpty());    
+       //tree.print();
+      
        tree.remove(3);
        assert(!tree.isEmpty());
- 
+
        tree.remove(2);
        assert(!tree.isEmpty());   
               
@@ -512,7 +515,7 @@ public class RNTReeTest {
         Node n23 = n19.setNewRight(23);
         n23.paintRed();
         
-        tree.print(); ref.print();
+        // tree.print(); ref.print();
         assert(tree.toString().equals(ref.toString()));
     }
 
