@@ -48,6 +48,12 @@ public class RNTReeTest {
     }
   
     
+    public void invertNodesColors(RNTree tree_, Integer[] elsToInvert){
+        for (Integer el : elsToInvert){
+            tree_.findNode(el).invertColor();
+        }
+    }
+    
     public RNTree createManualBinTree_ToSimpleLeftRotate01(){
         RNTree ref = new RNTree();
         
@@ -114,7 +120,7 @@ public class RNTReeTest {
         t.insert(70);
         return t;
     }
-    
+  
     public RNTree createBinTree01(){
         RNTree t = new RNTree();
         Node n50 = t.insert(50);
@@ -371,7 +377,9 @@ public class RNTReeTest {
         assert(tree.toString().equals(ref.toString()));                  
     } 
     
-/*    
+/*
+    
+    BinTree03 is no longer valid!
     @org.junit.Test()
     public void testRemove_HasChildsFarAway(){
         tree = this.createBinTree03();
@@ -402,7 +410,7 @@ public class RNTReeTest {
         //ref.findNode(25).setLeft(new Node(null));
         assert(tree.toString().equals(ref.toString()));                                  
     } 
-  */  
+    */
     @org.junit.Test()
     public void testFindFamily(){
         tree = this.createBinTree01();
@@ -473,17 +481,12 @@ public class RNTReeTest {
     
     @org.junit.Test()
     public void testInsertRN_AllCases_01(){
-        tree.insert(8);
-        tree.insert(5);
-        tree.insert(15);
-        tree.insert(12);
-        tree.insert(19);
-        tree.insert(9);
-        tree.insert(13);
-        tree.insert(23);
-
-        tree.insert(10); // Many Balance Operations Happens Here
         
+        for (Integer el : new Integer[]{8, 5, 15, 12, 19, 9, 13, 23, 10}){
+            tree.insert(el);
+            tree.print();
+        }
+                
         RNTree ref = new RNTree();
         Node n12 = ref.insert(12);
         n12.paintBlack();
@@ -515,6 +518,40 @@ public class RNTReeTest {
         // tree.print(); ref.print();
         assert(tree.toString().equals(ref.toString()));
     }
+    
+    @org.junit.Test()
+    public void testRemoveRN_Case1_01(){
+        // https://imgur.com/a/ac4Ql
+        
+        tree.insert(7);
+        tree.insert(2);
+        tree.insert(20);
+        tree.insert(25);
+        tree.insert(30);
+        tree.insert(1);
+        tree.insert(5);
+        tree.insert(4);
+        
+        tree.remove(2);
+        
+        RNTree ref = new RNTree();
+                
+        ref.insert(7);
+        ref.insert(4);
+        ref.insert(25);
+        ref.insert(1);
+        ref.insert(5);
+        ref.insert(20);
+        ref.insert(30);
+
+        this.invertNodesColors(ref, new Integer[]{1, 4, 5}); 
+     
+        // tree.print(); ref.print();
+        assert(tree.toString().equals(ref.toString()));
+    }    
+    
+    
+
 
     @org.junit.Test()
     public void testSimpleLeftRotation_01() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException{

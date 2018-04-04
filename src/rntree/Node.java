@@ -177,6 +177,10 @@ public class Node {
     public String toString(){
         return "[Node " + this.getText() + "]";
     }
+    
+    public void print(){
+        System.out.println(this);
+    }
    
        
 }

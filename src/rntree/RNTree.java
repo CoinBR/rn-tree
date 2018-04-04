@@ -82,7 +82,7 @@ public class RNTree {
                 // cases 2 and 3 (Black Uncle)
                 else{
                     Family rotationBase = fam.isTriangle() ? fam : this.findFamily(fam.getParent());
-                    this.rotate(!fam.isRight(), rotationBase);
+                    this.rotate(!fam.isRight(), rotationBase); // rotate left if its a right son. vice-versa
                     // case 3
                     if (fam.isLine()){
                         fam.getParent().invertColor();
@@ -116,11 +116,9 @@ public class RNTree {
         Node main = fam.getMain();
         Node keep = main.getSon(direction);
         Node oldTop = fam.getParent();
+        Family oldTopFam = this.findFamily(oldTop);
         
-        // If grandpa is aboveRoot, its child/son will always be on right side
-        Boolean grandPaSonDirection = oldTop == getRoot() ? true : direction;
-        fam.getGrandParent().setSon(main, grandPaSonDirection);
-        
+        fam.getGrandParent().setSon(main, oldTopFam.isRight());
         main.setSon(oldTop, direction);        
         oldTop.setSon(keep, !direction);
                 
@@ -230,8 +228,7 @@ public class RNTree {
         else{
             if (repNode.hasRight()){ delNode.setRight(repNode.getRight()); }
             if (repNode.hasLeft()){ delNode.setRight(repNode.getLeft()); }
-        }
-        
+        }     
         
         delNode.swap(repNode);
     }
@@ -260,6 +257,7 @@ public class RNTree {
     
 
     public void print(){
+        System.out.print("\n\n\n\n");
         System.out.print(this.toString());
     }
        
