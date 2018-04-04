@@ -173,6 +173,10 @@ public class Node {
         Node r = this.right != null ? this.right : new Node(null);
             return l.getElement() != null || r.getElement() != null;
     }
+    
+    public String toString(){
+        return "[Node " + this.getText() + "]";
+    }
    
        
 }

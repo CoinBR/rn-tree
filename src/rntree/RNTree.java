@@ -88,9 +88,10 @@ public class RNTree {
                         fam.getParent().invertColor();
                         fam.getGrandParent().invertColor();
                     }
-                    Node nextToCheck = rotationBase.getMain().getSon(!fam.isRight());
-                    System.out.println(nextToCheck.getElement());
-                    if (nextToCheck.getElement() != null) this.balance(nextToCheck);
+                    
+                    Node probablyNext = rotationBase.getMain().getSon(!fam.isRight());
+                    Node next = probablyNext.getElement() == null ? this.findFamily(node).getMain() : probablyNext;
+                    this.balance(next);
                 }
             }
     }
@@ -126,9 +127,11 @@ public class RNTree {
         Node greater = this.getNodeWithGreaterElement(oldTop, keep);
         Node smaller = this.getNodeWithSmallerElement(oldTop, keep);       
         
-        if(        (toLeft && greater == oldTop)
-                || (toRight && smaller == oldTop))
+        if(  keep.getElement() != null &&
+             ((toLeft && greater == oldTop) 
+             || (toRight && smaller == oldTop)))
         {
+            System.out.println("SWAP");
             oldTop.swap(keep);
         }
     }
@@ -228,6 +231,8 @@ public class RNTree {
             if (repNode.hasRight()){ delNode.setRight(repNode.getRight()); }
             if (repNode.hasLeft()){ delNode.setRight(repNode.getLeft()); }
         }
+        
+        
         delNode.swap(repNode);
     }
     

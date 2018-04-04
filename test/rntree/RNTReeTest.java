@@ -222,15 +222,12 @@ public class RNTReeTest {
        
        tree.insert(1);
        assert(!tree.isEmpty());   
-       //tree.print();
        
        tree.insert(2);
        assert(!tree.isEmpty());
-       // tree.print();
        
        tree.insert(3);
        assert(!tree.isEmpty());    
-       tree.print();
       
        tree.remove(3);
        assert(!tree.isEmpty());
@@ -374,7 +371,7 @@ public class RNTReeTest {
         assert(tree.toString().equals(ref.toString()));                  
     } 
     
-    
+/*    
     @org.junit.Test()
     public void testRemove_HasChildsFarAway(){
         tree = this.createBinTree03();
@@ -405,7 +402,7 @@ public class RNTReeTest {
         //ref.findNode(25).setLeft(new Node(null));
         assert(tree.toString().equals(ref.toString()));                                  
     } 
-    
+  */  
     @org.junit.Test()
     public void testFindFamily(){
         tree = this.createBinTree01();
