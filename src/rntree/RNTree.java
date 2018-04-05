@@ -129,7 +129,6 @@ public class RNTree {
              ((toLeft && greater == oldTop) 
              || (toRight && smaller == oldTop)))
         {
-            System.out.println("SWAP");
             oldTop.swap(keep);
         }
     }
@@ -231,6 +230,9 @@ public class RNTree {
         }     
         
         delNode.swap(repNode);
+        
+        // case 2
+        if (delNode.isRed() && repNode.isBlack()) { delNode.paintBlack(); }
     }
     
  /*   public Node remove(Integer element){

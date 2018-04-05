@@ -422,7 +422,51 @@ public class RNTReeTest {
         assert(f.getBrother() == tree.findNode(60));
         assert(f.getGrandParent() == tree.findNode(50));
         assert(f.getUncle() == tree.findNode(25));
-    }    
+    }  
+    
+
+    @org.junit.Test()
+    public void testSimpleLeftRotation_01() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException{
+        
+        this.tree = this.createManualBinTree_ToSimpleLeftRotate01();
+        RNTree ref = this.createManualBinTree_ToSimpleLeftRotate01();
+               
+        Node n35 = ref.findNode(35);
+        Node n32 = ref.findNode(32);
+        Node n33 = ref.findNode(33);
+        
+        n32.setRight(n33);
+        n35.setLeft(n32);
+        
+        Node aboveRoot = (Node) mp.get(ref, "aboveRoot");
+        aboveRoot.setRight(n35);
+        mp.invoke(this.tree, "rotate", false, 35);
+        
+        // tree.print(); ref.print();
+        assert(tree.toString().equals(ref.toString()));
+    }       
+    
+    @org.junit.Test()
+    public void testSimpleRightRotation_01() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException{
+        
+        this.tree = this.createManualBinTree_ToSimpleRightRotate01();
+        RNTree ref = this.createManualBinTree_ToSimpleRightRotate01();
+               
+        Node n20 = ref.findNode(20);
+        Node n50 = ref.findNode(50);
+        Node n30 = ref.findNode(30);
+        
+        n50.setLeft(n30);
+        n20.setRight(n50);
+        
+        Node aboveRoot = (Node) mp.get(ref, "aboveRoot");
+        aboveRoot.setRight(n20);
+        mp.invoke(this.tree, "rotate", true, 20);
+
+        // tree.print(); ref.print();
+        assert(tree.toString().equals(ref.toString()));
+    }     
+    
     
     @org.junit.Test()
     public void testInsertRN_DoNothingCase(){
@@ -484,7 +528,7 @@ public class RNTReeTest {
         
         for (Integer el : new Integer[]{8, 5, 15, 12, 19, 9, 13, 23, 10}){
             tree.insert(el);
-            tree.print();
+            // tree.print();
         }
                 
         RNTree ref = new RNTree();
@@ -548,51 +592,32 @@ public class RNTReeTest {
      
         // tree.print(); ref.print();
         assert(tree.toString().equals(ref.toString()));
-    }    
-    
-    
+    }   
 
-
-    @org.junit.Test()
-    public void testSimpleLeftRotation_01() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException{
-        
-        this.tree = this.createManualBinTree_ToSimpleLeftRotate01();
-        RNTree ref = this.createManualBinTree_ToSimpleLeftRotate01();
-               
-        Node n35 = ref.findNode(35);
-        Node n32 = ref.findNode(32);
-        Node n33 = ref.findNode(33);
-        
-        n32.setRight(n33);
-        n35.setLeft(n32);
-        
-        Node aboveRoot = (Node) mp.get(ref, "aboveRoot");
-        aboveRoot.setRight(n35);
-        mp.invoke(this.tree, "rotate", false, 35);
-        
-        // tree.print(); ref.print();
-        assert(tree.toString().equals(ref.toString()));
-    }       
+    
     
     @org.junit.Test()
-    public void testSimpleRightRotation_01() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, NoSuchMethodException{
+    public void testRemoveRN_Case2_01(){
+        // 
         
-        this.tree = this.createManualBinTree_ToSimpleRightRotate01();
-        RNTree ref = this.createManualBinTree_ToSimpleRightRotate01();
-               
-        Node n20 = ref.findNode(20);
-        Node n50 = ref.findNode(50);
-        Node n30 = ref.findNode(30);
+        for (Integer el : new Integer[]{7, 2, 20, 25, 30, 1, 5}){
+            this.tree.insert(el);
+            // tree.print();
+        }                
+        this.tree.remove(2);
         
-        n50.setLeft(n30);
-        n20.setRight(n50);
-        
-        Node aboveRoot = (Node) mp.get(ref, "aboveRoot");
-        aboveRoot.setRight(n20);
-        mp.invoke(this.tree, "rotate", true, 20);
-
+        RNTree ref = new RNTree();
+                
+        for (Integer el : new Integer[]{7, 5, 25, 20, 30, 1}){
+            ref.insert(el);
+            // tree.print();
+        }
+        // this.invertNodesColors(ref, new Integer[]{1, 4, 5}); 
+     
         // tree.print(); ref.print();
         assert(tree.toString().equals(ref.toString()));
-    }       
+    }     
+
+    
     
 }
